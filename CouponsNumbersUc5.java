@@ -1,22 +1,50 @@
 package com.bridgelabz.logicalproblems;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class CouponsNumbersUc5 {
 	public static void main(String[] args) 
 	{
-		char[] chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
-		int max=100000000;
-		int random=(int) (Math.random()*max);	
-		StringBuffer sb=new StringBuffer();
-		
-		while (random>0)
-		{
-			char ch = chars[random % chars.length];
-			sb.append(ch);
-			random /= chars.length;
-		}
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter how many unique coupon code you want: ");
+		int coupon=sc.nextInt();
 
-		String couponCode=sb.toString();
-		System.out.println("Coupon Code: "+couponCode);	
+		Random random=new Random();
+		int counter=0;
+		int array[]=new int[coupon];
+		int i=0;
+
+		while(true)
+		{
+			if(i==coupon)
+				break;
+
+			boolean test=true;
+			int num=random.nextInt(1000000);
+			for(int j=0; j<array.length;j++)
+			{
+				if(array[j]==num)
+				{
+					test=false;
+					break;
+
+				}
+			}
+			if(test == true)
+			{	
+				array[i]=num;
+				i++;
+			}
+			counter++;
+
+		}
+		System.out.println("Total number of random numbers required to generate distinct coupon code= "+counter);
+		System.out.println("The distinct coupon codes are:");
+		for(int k=0;k<array.length;k++)
+			System.out.println(array[k]);
+
+		sc.close();
 	}
 
 }
